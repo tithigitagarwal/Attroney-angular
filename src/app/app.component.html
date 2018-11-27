@@ -1,0 +1,35 @@
+
+  <header>
+    <h2 class="text-center">REGISTER CASE</h2>
+  </header>
+  <main>
+    <div class="container-fluid height-100">
+      <div class="row height-100">
+        <div class="col-sm-4 height-100">
+            <h3>Forms Option</h3>
+            <p>Here is the list of forms to be filled, few are the required forms that are mandatory to be filled, please select form of your choice to add other forms into your case.</p>
+            <!--Show all available forms list-->
+            <ul class="forms-list">
+              <li *ngFor="let formList of formLists">
+                <div class="checkbox">
+                  <label><input type="checkbox" [name]="formList.name" [id]="formList.id" [checked]='formList.default' [disabled]='formList.default' (change)='addForm($event)' >Form - {{formList.name}}</label>
+                </div>
+              </li>
+            </ul>
+        </div>
+        <div class="col-sm-8 height-100">
+          <div class="wrapper">
+            <div *ngIf="pills.length">
+              <ul class="nav nav-pills">
+                  <li class="default" routerLinkActive="active" *ngFor="let pill of pills; first as isFirst">
+                    <a [routerLink]="'form'+pill.name" (click)="active = !active">Form - {{pill.name}}</a>
+                  </li>
+              </ul>
+            </div>
+            <!--Set different forms dynamically-->
+            <router-outlet></router-outlet>
+          </div>         
+        </div>
+      </div>
+    </div>
+</main>
